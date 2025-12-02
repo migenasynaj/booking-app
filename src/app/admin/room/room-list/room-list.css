@@ -1,0 +1,95 @@
+.guesthouse-container {
+  background: white;
+  border-radius: 10px;
+}
+
+.guesthouse-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.guesthouse-btn {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.guesthouse-btn:hover {
+  background-color: #0e7490;
+  color: white;
+}
+
+.rooms-container {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* .slide-notice {
+  background: #06b6d4;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  margin-top: 12px;
+  text-align: center;
+  animation: slideDown 0.4s ease-out;
+} */
+
+.slide-notice {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0e7490;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 15px;
+  animation: slideUpDown 3s ease forwards;
+  z-index: 9999;
+  align-self: center;
+}
+
+.btn-primary {
+  background: #0e7490 !important;
+  border-color: #0e7490 !important;
+  color: #ffffff !important;
+}
+.btn-primary:hover {
+  background: #0891b2 !important;
+  border-color: #0891b2 !important;
+}
+.btn-primary:active {
+  background: #06b6d4 !important;
+  border-color: #06b6d4 !important;
+}
+.spinner-border {
+  color: #0891b2 !important;
+}
+
+.table tr,
+.table td {
+  border: none !important;
+}
+.table-hover tbody tr:hover {
+  background: #f0f9ff !important;
+}
+.table-light > tr > th {
+  background: #e5e7eb !important;
+  color: #111827 !important;
+  border: none !important;
+  font-weight: 600;
+}
+.room-img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}

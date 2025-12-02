@@ -1,0 +1,187 @@
+@if (loading) {
+
+<div class="modal-body text-center">Loading...</div>
+
+} @else if (error) {
+
+<div class="modal-body text-danger text-center">
+  {{ error }}
+</div>
+
+} @else {
+
+<form [formGroup]="form">
+  @if (mode === 'edit') {
+
+  <div class="modal-header">
+    <h5 class="modal-title">Room Details</h5>
+    <button class="btn-close" (click)="onCancel()"></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="mb-3">
+      <label>ID</label>
+      <input class="form-control" [value]="room.id" disabled />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input class="form-control" formControlName="name" />
+      @if (nameIsInvalid) {
+      <div class="invalid-feedback d-block">Name must be between 3 and 50 characters.</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label>Description</label>
+      <textarea class="form-control" formControlName="description"></textarea>
+      @if (descriptionIsInvalid) {
+      <div class="invalid-feedback d-block">Description must be between 10 and 500 characters.</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label>Image URL</label>
+      <input class="form-control" formControlName="image" />
+    </div>
+
+    <div class="mb-3">
+      <label>Price</label>
+      <input class="form-control" type="number" formControlName="price" />
+    </div>
+
+    <div class="mb-3">
+      <label>Number of Beds</label>
+      <input class="form-control" type="number" formControlName="numberOfBeds" />
+      @if (numberOfBedsIsInvalid) {
+      <div class="invalid-feedback d-block">Number of beds must be between 1 and 10.</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label>Amenities</label>
+      <div class="border rounded p-2">
+        @for (a of amenityValues(); track a) {
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [value]="a"
+            [checked]="form.value.amenities?.includes(a)"
+            (change)="onAmenityToggle(a, $event.target.checked)"
+          />
+
+          <label class="form-check-label">
+            {{ getAmenityName(a) }}
+          </label>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="mb-3">
+      <label>Gueshouse ID</label>
+      <input class="form-control" formControlName="guesthouseId" readonly />
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+    <button class="btn btn-primary" [disabled]="form.invalid" (click)="onSave()">Save</button>
+  </div>
+
+  } @else if (mode === 'create') {
+
+  <div class="modal-header">
+    <h5 class="modal-title">Create Room</h5>
+    <button class="btn-close" (click)="onCancel()"></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="mb-3">
+      <label><span class="required">*</span> Name</label>
+      <input class="form-control" formControlName="name" />
+      @if (nameIsInvalid) {
+      <div class="invalid-feedback d-block">Name must be between 3 and 50 characters.</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label><span class="required">*</span> Description</label>
+      <textarea class="form-control" formControlName="description"></textarea>
+      @if (descriptionIsInvalid) {
+      <div class="invalid-feedback d-block">Description must be between 10 and 500 characters.</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label>Image URL</label>
+      <input class="form-control" formControlName="image" />
+    </div>
+
+    <div class="mb-3">
+      <label>Price</label>
+      <input class="form-control" type="number" formControlName="price" />
+    </div>
+
+    <div class="mb-3">
+      <label>Number of Beds</label>
+      <input class="form-control" type="number" formControlName="numberOfBeds" />
+      @if (numberOfBedsIsInvalid) {
+      <div class="invalid-feedback d-block">Number of beds must be between 1 and 10.</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label>Amenities</label>
+      <div class="border rounded p-2">
+        @for (a of amenityValues(); track a) {
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [value]="a"
+            [checked]="form.value.amenities?.includes(a)"
+            (change)="onAmenityToggle(a, $event.target.checked)"
+          />
+
+          <label class="form-check-label">
+            {{ getAmenityName(a) }}
+          </label>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="mb-3">
+      <label>Gueshouse ID</label>
+      <input class="form-control" formControlName="guesthouseId" readonly />
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+    <button class="btn btn-primary" [disabled]="form.invalid" (click)="onCreate()">Create</button>
+  </div>
+
+  }
+</form>
+
+@if (mode === 'delete') {
+
+<div class="modal-header">
+  <h5 class="modal-title">Delete Room</h5>
+  <button class="btn-close" (click)="onCancel()"></button>
+</div>
+
+<div class="modal-body">
+  <p>
+    Are you sure you want to delete
+    <strong>{{ roomName }}</strong> from <strong>{{ guesthouseName }} </strong> guesthouse ?
+  </p>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+  <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+</div>
+
+} }

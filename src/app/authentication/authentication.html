@@ -1,0 +1,141 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white px-4">
+  <a class="navbar-brand fw-bold">BookingApp</a>
+
+  <div class="ms-auto">
+    <span class="me-3 text-muted"> Authentication </span>
+  </div>
+</nav>
+
+<div class="auth-container col-md-6 offset-md-3 mt-4">
+  @if (mode === 'login') {
+
+  <form [formGroup]="loginForm" class="form-box">
+    <h3 class="mb-3 text-center">Login</h3>
+
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" class="form-control" formControlName="email" />
+      @if(emailIsInvalid){
+      <div class="invalid-feedback d-block">
+        <p class="control-error">E-mail is incorrect</p>
+      </div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label class="mt-2">Password</label>
+      <input type="password" class="form-control" formControlName="password" />
+      @if(passwordIsInvalid){
+      <div class="invalid-feedback d-block">
+        <p class="control-error">Password not correct</p>
+      </div>
+      }
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+      <button
+        type="button"
+        class="btn btn-primary w-50 me-2"
+        [disabled]="loginForm.invalid"
+        (click)="onLogin()"
+      >
+        Login
+      </button>
+
+      <button type="button" class="btn btn-outline-secondary w-50" (click)="switchMode('register')">
+        Switch to Register
+      </button>
+    </div>
+  </form>
+
+  } @if (mode === 'register') {
+
+  <form [formGroup]="registerForm" class="form-box">
+    <h3 class="mb-3 text-center">Register</h3>
+
+    <div class="mb-3">
+      <label>FirstName</label>
+      <input type="text" class="form-control" formControlName="firstName" />
+      @if(firstNameIsInvalid){
+      <div class="invalid-feedback d-block">
+        <p class="control-error">Max length is 50 and min length is 2</p>
+      </div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label class="mt-2">LastName</label>
+      <input type="text" class="form-control" formControlName="lastName" />
+      @if(lastNameIsInvalid){
+      <div class="invalid-feedback d-block">
+        <p class="control-error">Max length is 50 and min length is 2</p>
+      </div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label class="mt-2">Username</label>
+      <input type="text" class="form-control" formControlName="username" />
+      @if(usernameIsInvalid){
+      <div class="invalid-feedback d-block">
+        <p class="control-error">Max length is 50 and min length is 2</p>
+      </div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label class="mt-2">Email</label>
+      <input type="email" class="form-control" formControlName="email" />
+      @if(emailInvalid){
+      <div class="invalid-feedback d-block">
+        <p class="control-error">Email incorrect</p>
+      </div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label class="mt-2">Phone Number</label>
+      <input type="text" class="form-control" formControlName="phoneNumber" />
+      @if(phoneNumberInvalid){
+      <div class="invalid-feedback d-block">
+        <p class="control-error">
+          Phone number must contain only digits and be 8 to 15 characters long.
+        </p>
+      </div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label class="mt-2">Password</label>
+      <input type="password" class="form-control" formControlName="password" />
+      @if(passwordInvalid){
+      <div class="invalid-feedback d-block">
+        <p class="control-error">Password must contain at least:</p>
+        <ul>
+          <li>one lowercase letter</li>
+          <li>one uppercase letter</li>
+          <li>one number</li>
+          <li>one character</li>
+        </ul>
+      </div>
+
+      }
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+      <button
+        type="button"
+        class="btn btn-success w-50 me-2"
+        [disabled]="registerForm.invalid"
+        (click)="onRegister()"
+      >
+        Register
+      </button>
+
+      <button type="button" class="btn btn-outline-secondary w-50" (click)="switchMode('login')">
+        Switch to Login
+      </button>
+    </div>
+  </form>
+  }
+</div>

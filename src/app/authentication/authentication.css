@@ -1,0 +1,27 @@
+.auth-container {
+  width: 420px;
+  margin: 80px auto;
+}
+
+.form-box {
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  font-weight: 500;
+}
+.navbar-brand {
+  color: #0e7490 !important;
+}
+.navbar span {
+  color: #6b7280 !important;
+}
+
+.navbar {
+  background: #ffffff !important;
+  border-bottom: 1px solid #d1d5db;
+  color: #111827;
+}

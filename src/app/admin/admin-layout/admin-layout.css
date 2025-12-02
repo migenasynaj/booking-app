@@ -1,0 +1,43 @@
+.sidebar {
+  background: #ffffff;
+  border-right: 1px solid #d1d5db;
+  min-height: calc(100vh - 56px);
+}
+
+.sidebar .nav-link {
+  color: #111827 !important;
+  border-radius: 6px;
+  padding: 10px 14px;
+  transition: background 0.2s;
+}
+
+.sidebar .nav-link:hover {
+  background: #e5e7eb;
+}
+
+/* Active Route Style */
+.active-link {
+  background: #0e7490 !important;
+  color: #ffffff !important;
+}
+
+/* Content spacing */
+.content-area {
+  background: #f3f4f6;
+  min-height: calc(100vh - 56px);
+  padding: 25px;
+}
+
+/* Navbar brand text */
+.navbar-brand {
+  color: #0e7490 !important;
+}
+.navbar span {
+  color: #6b7280 !important;
+}
+
+.navbar {
+  background: #ffffff !important;
+  border-bottom: 1px solid #d1d5db;
+  color: #111827;
+}

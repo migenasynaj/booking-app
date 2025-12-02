@@ -1,0 +1,103 @@
+<div class="container-fluid">
+  @if (successMessage) {
+  <div class="slide-notice">
+    {{ successMessage }}
+  </div>
+  } @if (error) {
+  <div class="alert alert-danger text-center mt-3">
+    {{ error }}
+  </div>
+  }
+
+  <div class="guesthouse-container mt-3 p-3">
+    <h4 class="mb-3">Select Guesthouse to see rooms:</h4>
+
+    <div class="guesthouse-list">
+      @for (gh of guesthouses; track gh.id) {
+      <button class="btn btn-outline-secondary guesthouse-btn" (click)="loadRooms(gh.id, gh.name)">
+        {{ gh.name }}
+      </button>
+      }
+    </div>
+  </div>
+
+  @if (selectedGuesthouseId) {
+
+  <div class="rooms-container mt-4 p-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4 class="m-0">
+        Rooms in: <strong>{{ selectedGuesthouseName }}</strong>
+      </h4>
+
+      <button class="btn btn-primary btn-sm" (click)="onCreate()">
+        <i class="bi bi-plus-circle"></i> Create Room
+      </button>
+    </div>
+
+    @if(roomsLoading){
+    <div class="text-center py-4">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p class="mt-2">Loading rooms...</p>
+    </div>
+    } @if(!roomsLoading){
+    <div class="table-responsive">
+      <table class="table table-hover align-middle bg-white shadow-sm">
+        <thead class="table-light">
+          <tr class="border">
+            <th>ID</th>
+            <th>Name</th>
+            <!-- <th>Description</th> -->
+            <th>Image</th>
+            <th>Beds</th>
+            <th>Price</th>
+            <!-- <th>Guesthouse ID</th> -->
+            <th>Amenities</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (room of rooms; track room.id) {
+          <tr>
+            <td>{{ room.id }}</td>
+            <td>{{ room.name }}</td>
+            <!-- td>{{ room.description }}</td> -->
+            <td>
+              <img
+                [src]="'data:image/jpeg;base64,' + room.image"
+                alt="Room image"
+                class="room-img"
+              />
+            </td>
+
+            <!-- <td>{{ room.image }}</td>  -->
+            <td>{{ room.numberOfBeds }}</td>
+            <td>{{ room.price }} €</td>
+            <!-- <td>{{ room.guestHouseId }}</td> -->
+
+            <td>
+              @for (a of room.amenities; track a) {
+              <div>
+                {{ getAmenityName(a) }}
+              </div>
+              }
+            </td>
+
+            <td>
+              <button class="btn btn-primary btn-sm me-2" (click)="onEdit(room)">
+                <i class="bi bi-pencil"></i>
+              </button>
+
+              <button class="btn btn-danger btn-sm" (click)="onDelete(room)">
+                <i class="bi bi-trash3"></i>
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    }
+  </div>
+  }
+</div>

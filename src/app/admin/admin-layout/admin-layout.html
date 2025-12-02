@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white px-4">
+  <a class="navbar-brand fw-bold" routerLink="/">BookingApp</a>
+
+  <div class="ms-auto">
+    <button class="btn btn-outline-danger btn-sm" (click)="onLogout()">
+      <i class="bi bi-person"></i> Logout
+    </button>
+  </div>
+</nav>
+
+<div class="d-flex">
+  <div class="sidebar bg-white shadow-md p-3">
+    <ul class="nav flex-column gap-2">
+      <li class="nav-item">
+        <a class="nav-link text-black" routerLink="guesthouses" routerLinkActive="guesthouses"
+          >Guesthouses</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-black" routerLink="rooms" routerLinkActive="rooms">Rooms</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-black" routerLink="users" routerLinkActive="users">Users</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="content-area p-4 flex-grow-1">
+    <router-outlet></router-outlet>
+  </div>
+</div>

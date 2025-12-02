@@ -1,0 +1,67 @@
+.container-fluid {
+  padding-top: 0px !important;
+}
+.container-xl {
+  background-color: #ffffff !important;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 4px;
+  height: auto;
+}
+
+.container-sm {
+  background-color: #f2f4f7 !important;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+.header-box {
+  padding: 0px 15px;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  color: #111827;
+}
+
+.table-light > tr > th {
+  background: #e5e7eb !important;
+  color: #111827 !important;
+  border: none !important;
+  font-weight: 600;
+}
+
+.table tr,
+.table td,
+.table th {
+  border: none !important;
+}
+
+.table-hover tbody tr:hover {
+  background: #f0f9ff !important;
+}
+.btn-primary {
+  background: #0e7490 !important;
+  border-color: #0e7490 !important;
+  color: #ffffff !important;
+}
+.btn-primary:hover {
+  background: #0891b2 !important;
+  border-color: #0891b2 !important;
+}
+.btn-primary:active {
+  background: #06b6d4 !important;
+  border-color: #06b6d4 !important;
+}
+.slide-notice {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0e7490;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 15px;
+  animation: slideUpDown 3s ease forwards;
+  z-index: 9999;
+  align-self: center;
+}

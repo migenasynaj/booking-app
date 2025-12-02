@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  @if (successMessage) {
+  <div class="slide-notice">
+    {{ successMessage }}
+  </div>
+  } @if (loading) {
+  <p class="text-center"></p>
+  } @if (error) {
+  <div class="alert alert-danger">{{ error }}</div>
+  } @else if (guesthouses) {
+  <div class="container-xl bg-light">
+    <div class="container-sm">
+      <div class="d-flex justify-content-between align-items-center header-box">
+        <h5 class="m-0">Guesthouse</h5>
+
+        <button class="btn btn-primary btn-sm" (click)="onCreate()">
+          Create
+          <i class="bi bi-plus-circle"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="table-responsive table-wrapper table-center mt-4">
+          <table class="table table-hover align-middle shadow-sm bg-white">
+            <thead class="table-light">
+              <tr class="border">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for(gh of guesthouses; track gh.id){
+              <tr>
+                <td>{{ gh.id }}</td>
+                <td>{{ gh.name }}</td>
+                <td>{{ gh.description }}</td>
+                <td>
+                  <button class="btn btn-primary btn-sm me-2" (click)="onEdit(gh)">
+                    <i class="bi bi-pencil"></i>
+                  </button>
+
+                  <button class="btn btn-danger btn-sm" (click)="onDelete(gh)">
+                    <i class="bi bi-trash3"></i>
+                  </button>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  }
+</div>

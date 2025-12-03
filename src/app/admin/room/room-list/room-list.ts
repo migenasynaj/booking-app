@@ -78,7 +78,6 @@ export class RoomList {
     const modalRef = this.modalService.open(RoomDetails, {
       size: 'lg',
       centered: true,
-      backdrop: 'static',
     });
 
     modalRef.componentInstance.mode = 'create';
@@ -98,12 +97,12 @@ export class RoomList {
     const modalRef = this.modalService.open(RoomDetails, {
       size: 'lg',
       centered: true,
-      backdrop: 'static',
     });
 
     modalRef.componentInstance.mode = 'edit';
     modalRef.componentInstance.roomId = room.id;
     modalRef.componentInstance.guesthouseId = room.guestHouseId;
+    modalRef.componentInstance.guesthouseName = this.selectedGuesthouseName;
 
     modalRef.closed.subscribe((result) => {
       if (result === 'saved') {

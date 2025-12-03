@@ -25,10 +25,6 @@
 
   <div class="rooms-container mt-4 p-3">
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4 class="m-0">
-        Rooms in: <strong>{{ selectedGuesthouseName }}</strong>
-      </h4>
-
       <button class="btn btn-primary btn-sm" (click)="onCreate()">
         <i class="bi bi-plus-circle"></i> Create Room
       </button>
@@ -44,13 +40,9 @@
       <table class="table table-hover align-middle bg-white shadow-sm">
         <thead class="table-light">
           <tr class="border">
-            <th>ID</th>
             <th>Name</th>
-            <!-- <th>Description</th> -->
-            <th>Image</th>
             <th>Beds</th>
             <th>Price</th>
-            <!-- <th>Guesthouse ID</th> -->
             <th>Amenities</th>
             <th>Actions</th>
           </tr>
@@ -59,21 +51,9 @@
         <tbody>
           @for (room of rooms; track room.id) {
           <tr>
-            <td>{{ room.id }}</td>
             <td>{{ room.name }}</td>
-            <!-- td>{{ room.description }}</td> -->
-            <td>
-              <img
-                [src]="'data:image/jpeg;base64,' + room.image"
-                alt="Room image"
-                class="room-img"
-              />
-            </td>
-
             <td>{{ room.numberOfBeds }}</td>
             <td>{{ room.price }} €</td>
-            <!-- <td>{{ room.guestHouseId }}</td> -->
-
             <td>
               @for (a of room.amenities; track a) {
               <div>
@@ -81,7 +61,6 @@
               </div>
               }
             </td>
-
             <td>
               <button class="btn btn-primary btn-sm me-2" (click)="onEdit(room)">
                 <i class="bi bi-pencil"></i>

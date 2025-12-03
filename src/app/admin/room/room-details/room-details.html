@@ -20,11 +20,6 @@
 
   <div class="modal-body">
     <div class="mb-3">
-      <label>ID</label>
-      <input class="form-control" [value]="room.id" disabled />
-    </div>
-
-    <div class="mb-3">
       <label class="form-label">Name</label>
       <input class="form-control" formControlName="name" />
       @if (nameIsInvalid) {
@@ -41,8 +36,33 @@
     </div>
 
     <div class="mb-3">
-      <label>Image URL</label>
-      <input class="form-control" formControlName="image" />
+      <label class="form-label">Image</label>
+
+      @if (form.value.image) {
+      <div class="text-center mb-3">
+        <img [src]="'data:image/jpeg;base64,' + form.value.image" alt="Room Image" class="image" />
+      </div>
+      } @else {
+      <p class="text-muted text-center">No image available</p>
+      }
+
+      <div class="d-flex gap-2 justify-content-center">
+        <button type="button" class="btn btn-outline-secondary" (click)="fileInput.click()">
+          {{ form.value.image ? 'Change Image' : 'Upload Image' }}
+        </button>
+
+        @if (form.value.image) {
+        <button type="button" class="btn btn-outline-danger" (click)="removeImage()">Remove</button>
+        }
+      </div>
+
+      <input
+        type="file"
+        accept="image/*"
+        #fileInput
+        class="file-input-hidden"
+        (change)="onFileSelected($event)"
+      />
     </div>
 
     <div class="mb-3">
@@ -79,8 +99,8 @@
       </div>
     </div>
     <div class="mb-3">
-      <label>Gueshouse ID</label>
-      <input class="form-control" formControlName="guesthouseId" readonly />
+      <label>Guesthouse Name: </label>
+      <input class="form-control guesthouse-readonly" formControlName="guesthouseName" readonly />
     </div>
   </div>
 
@@ -114,8 +134,37 @@
     </div>
 
     <div class="mb-3">
-      <label>Image URL</label>
-      <input class="form-control" formControlName="image" />
+      <label class="form-label">Image</label>
+
+      @if (form.value.image) {
+      <div class="text-center mb-3">
+        <img
+          [src]="'data:image/jpeg;base64,' + form.value.image"
+          alt="Room Image"
+          style="max-width: 100%; border-radius: 8px"
+        />
+      </div>
+      } @else {
+      <p class="text-muted text-center">No image available</p>
+      }
+
+      <div class="d-flex gap-2 justify-content-center">
+        <button type="button" class="btn btn-outline-primary" (click)="fileInput.click()">
+          {{ form.value.image ? 'Change Image' : 'Upload Image' }}
+        </button>
+
+        @if (form.value.image) {
+        <button type="button" class="btn btn-outline-danger" (click)="removeImage()">Remove</button>
+        }
+      </div>
+
+      <input
+        type="file"
+        accept="image/*"
+        #fileInput
+        style="display: none"
+        (change)="onFileSelected($event)"
+      />
     </div>
 
     <div class="mb-3">
@@ -152,8 +201,8 @@
       </div>
     </div>
     <div class="mb-3">
-      <label>Gueshouse ID</label>
-      <input class="form-control" formControlName="guesthouseId" readonly />
+      <label>Guesthouse Name: </label>
+      <input class="form-control guesthouse-readonly" formControlName="guesthouseName" readonly />
     </div>
   </div>
 

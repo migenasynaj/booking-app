@@ -7,5 +7,4 @@ export enum Amenities {
   WASHINGMACHINE = 5,
   SAFE = 6,
   WARDROBE = 7,
-  //   splice,
 }

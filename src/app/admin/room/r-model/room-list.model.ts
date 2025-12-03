@@ -17,6 +17,6 @@ export interface CreateRoomModel {
   image: string;
   price: number;
   numberOfBeds: number;
-  guestHouseId: number;
+  guesthouseId: number;
   amenities: Amenities[];
 }

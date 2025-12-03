@@ -19,7 +19,6 @@ export class RoomDetails {
   @Input() guesthouseId!: number;
   @Input() guesthouseName!: string;
   @Input() mode: 'create' | 'edit' | 'delete' = 'create';
-
   @Input() roomName!: string;
 
   room!: Room;
@@ -27,7 +26,6 @@ export class RoomDetails {
   error: string | null = null;
 
   form = new FormGroup({
-    id: new FormControl<string | null>(null),
     name: new FormControl<string>('', {
       validators: [Validators.required, Validators.maxLength(50), Validators.minLength(3)],
     }),
@@ -42,9 +40,8 @@ export class RoomDetails {
       validators: [Validators.required, Validators.maxLength(10), Validators.minLength(1)],
     }),
     amenities: new FormControl<Amenities[]>([], { validators: [Validators.required] }),
-    guesthouseId: new FormControl<number | null>(null),
+    guesthouseName: new FormControl<string | null>(null),
   });
-  isAmenitiesOpen: any;
 
   get nameIsInvalid() {
     return this.form.controls.name.touched && this.form.controls.name.invalid;
@@ -76,6 +73,25 @@ export class RoomDetails {
     }
   }
 
+  onFileSelected(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const file = target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const fullBase64 = reader.result as string;
+      const base64 = fullBase64.split(',')[1];
+      this.form.controls.image.setValue(base64);
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  removeImage() {
+    this.form.controls.image.setValue('');
+  }
+
   private createEmptyRoom(): Room {
     return {
       id: 0,
@@ -103,7 +119,7 @@ export class RoomDetails {
             price: data.price,
             numberOfBeds: data.numberOfBeds,
             amenities: data.amenities,
-            guesthouseId: data.guestHouseId,
+            guesthouseName: this.guesthouseName,
           });
 
           this.loading = false;
@@ -123,7 +139,7 @@ export class RoomDetails {
       this.room = this.createEmptyRoom();
 
       this.form.patchValue({
-        guesthouseId: this.guesthouseId,
+        guesthouseName: this.guesthouseName,
       });
 
       this.loading = false;
@@ -132,10 +148,10 @@ export class RoomDetails {
   }
 
   onSave() {
-    // if(this.form.invalid) {
-    //   this.form.markAllAsTouched();
-    //   return;
-    // }
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
     const updatedRoom: Room = {
       ...this.room,
@@ -178,7 +194,7 @@ export class RoomDetails {
       price: this.form.getRawValue().price!,
       numberOfBeds: this.form.getRawValue().numberOfBeds!,
       amenities: this.form.getRawValue().amenities!,
-      guestHouseId: this.form.getRawValue().guesthouseId!,
+      guesthouseId: this.guesthouseId,
     };
 
     this.service.createRoom(newRoom).subscribe({

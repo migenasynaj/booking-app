@@ -1,1 +1,39 @@
-<p>user-list works!</p>
+<div class="container-fluid">
+  @if (loading) {
+  <p class="text-center"></p>
+  } @if (error) {
+  <div class="alert alert-danger">{{ error }}</div>
+  } @else if (user) {
+  <div class="user-container mt-3 p-3">
+    <h4 class="mb-3">Users:</h4>
+    <div class="table-responsive">
+      <table class="table table-hover table-borderless align-middle bg-white shadow-sm">
+        <thead class="table-light">
+          <tr class="border">
+            <th class="col-numb">#</th>
+            <th class="col-name">Name</th>
+            <th class="col-surname">Surname</th>
+            <th class="col-role">Role</th>
+            <th class="col-action">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(user of user; track user.id; let i = $index){
+          <tr>
+            <td class="col-numb">{{ i + 1 }}</td>
+            <td class="col-name">{{ user.firstName }}</td>
+            <td class="col-surname">{{ user.lastName }}</td>
+            <td class="col-role">{{ user.role }}</td>
+            <td class="col-action text-end">
+              <button class="btn btn-primary btn-sm me-2" (click)="editUser(user.id)">
+                Edit <i class="bi bi-pencil"></i>
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  }
+</div>

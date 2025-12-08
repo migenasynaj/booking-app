@@ -46,7 +46,6 @@ export class GuesthouseList {
     const modalRef = this.modalService.open(GuesthouseDetails, {
       size: 'lg', // size of the modal window
       centered: true, //Modal will be centered vertically
-      backdrop: 'static',
     });
 
     modalRef.componentInstance.guesthouseId = gh.id;

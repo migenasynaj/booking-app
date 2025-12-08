@@ -23,7 +23,7 @@ export class GuesthouseDetails {
   error: string | null = null;
 
   form = new FormGroup({
-    id: new FormControl<number | null>(null),
+    // id: new FormControl<number | null>(null),
     name: new FormControl<string>('', {
       validators: [Validators.required, Validators.maxLength(20), Validators.minLength(3)],
     }),

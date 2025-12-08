@@ -78,7 +78,11 @@
       <input type="text" class="form-control" formControlName="username" />
       @if(usernameIsInvalid){
       <div class="invalid-feedback d-block">
-        <p class="control-error">Max length is 50 and min length is 2</p>
+        <p class="control-error">Max length is 20 and min length is 3</p>
+      </div>
+      } @if(errorMessageUsername){
+      <div class="invalid-feedback d-block">
+        <p>{{ errorMessageUsername }}</p>
       </div>
       }
     </div>
@@ -90,12 +94,16 @@
       <div class="invalid-feedback d-block">
         <p class="control-error">Email incorrect</p>
       </div>
+      } @if(errorMessageEmail){
+      <div class="invalid-feedback d-block">
+        <p>{{ errorMessageEmail }}</p>
+      </div>
       }
     </div>
 
     <div class="mb-3">
       <label class="mt-2">Phone Number</label>
-      <input type="text" class="form-control" formControlName="phoneNumber" />
+      <input type="tel" class="form-control" formControlName="phoneNumber" />
       @if(phoneNumberInvalid){
       <div class="invalid-feedback d-block">
         <p class="control-error">
@@ -110,7 +118,7 @@
       <input type="password" class="form-control" formControlName="password" />
       @if(passwordInvalid){
       <div class="invalid-feedback d-block">
-        <p class="control-error">Password must contain at least:</p>
+        <p class="control-error">Password must be 6-10 characters long and contain:</p>
         <ul>
           <li>one lowercase letter</li>
           <li>one uppercase letter</li>
@@ -122,6 +130,13 @@
       }
     </div>
 
+    <div class="invalid-feedback d-block">
+      @if(errorMessage){
+      <div class="invalid-feedback d-block">
+        <p>{{ errorMessage }}</p>
+      </div>
+      }
+    </div>
     <div class="d-flex justify-content-between mt-4">
       <button
         type="button"

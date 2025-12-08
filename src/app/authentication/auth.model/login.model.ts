@@ -3,7 +3,7 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface LoginResponse {
+export interface ResponseBody {
   id: string;
   username: string;
   token: string;

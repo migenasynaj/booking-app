@@ -11,6 +11,7 @@ import { AuthenticationService } from '../../authentication/authentication.servi
 export class AdminLayout {
   private authenticationService = inject(AuthenticationService);
   private router = inject(Router);
+
   onLogout() {
     this.authenticationService.logout();
     this.router.navigate(['/auth']);

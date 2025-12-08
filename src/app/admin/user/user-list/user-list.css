@@ -1,0 +1,46 @@
+.user-container {
+  background: white;
+  border-radius: 10px;
+}
+.table tr,
+.table td {
+  border: none !important;
+}
+.table-hover tbody tr:hover {
+  background: #f0f9ff !important;
+}
+.table-light > tr > th {
+  background: #e5e7eb !important;
+  color: #111827 !important;
+  border: none !important;
+  font-weight: 600;
+}
+.btn-primary {
+  background: #0e7490 !important;
+  border-color: #0e7490 !important;
+  color: #ffffff !important;
+}
+.btn-primary:hover {
+  background: #0891b2 !important;
+  border-color: #0891b2 !important;
+}
+.btn-primary:active {
+  background: #06b6d4 !important;
+  border-color: #06b6d4 !important;
+}
+
+.col-numb,
+.col-action {
+  width: 80px;
+  white-space: nowrap;
+}
+
+.text-end {
+  text-align: right;
+}
+
+.col-name,
+.col-surname,
+.col-role {
+  width: calc((100% - 160px) / 3);
+}

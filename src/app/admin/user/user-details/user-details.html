@@ -1,1 +1,65 @@
-<p>user-details works!</p>
+<div class="container-fluid">
+  <div class="user-container mt-4 p-3">
+    @if (successMessage) {
+    <div class="slide-notice">
+      {{ successMessage }}
+    </div>
+    } @if (loading) {
+    <p>Loading...</p>
+    } @if (error) {
+    <div class="alert alert-danger">{{ error }}</div>
+    } @if (!loading && !error) {
+
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="mb-3">
+        <label>First Name</label>
+        <input formControlName="firstName" class="form-control" />
+        @if(firstNameIsInvalid){
+        <div class="invalid-feedback d-block">
+          <p class="control-error">Max length is 50 and min length is 2</p>
+        </div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label>Last Name</label>
+        <input formControlName="lastName" class="form-control" />
+        @if(lastNameIsInvalid){
+        <div class="invalid-feedback d-block">
+          <p class="control-error">Max length is 50 and min length is 2</p>
+        </div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label>Email</label>
+        <input formControlName="email" class="form-control" />
+        @if(emailIsInvalid){
+        <div class="invalid-feedback d-block">
+          <p class="control-error">Invalid email</p>
+        </div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label>Phone</label>
+        <input formControlName="phoneNumber" class="form-control" />
+        @if(phoneNumberIsInvalid){
+        <div class="invalid-feedback d-block">
+          <p class="control-error">Invalid phoneNumber, must contain 10 to 13 digits.</p>
+        </div>
+        }
+      </div>
+      <!-- <div class="mb-3">
+        <label>Role</label>
+        <input formControlName="role" class="form-control" readonly />
+      </div> -->
+
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Save</button> |
+        <button type="button" class="btn btn-primary" routerLink="../">Go Back</button>
+      </div>
+    </form>
+    }
+  </div>
+</div>

@@ -16,6 +16,10 @@ export class Authentication {
   private router = inject(Router);
   mode: 'login' | 'register' = 'login';
 
+  errorMessageUsername: string | null = null;
+  errorMessageEmail: string | null = null;
+  errorMessage: string | null = null;
+
   loginForm = new FormGroup({
     email: new FormControl<string>('', {
       validators: [Validators.required, Validators.email],
@@ -92,6 +96,24 @@ export class Authentication {
     this.mode = mode;
   }
 
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  ngOnInit() {
+    const token = this.getToken();
+
+    if (token) {
+      const user = JSON.parse(localStorage.getItem('user')!);
+
+      if (user.role === 'Admin') {
+        this.router.navigate(['/admin'], { replaceUrl: true });
+      } else {
+        this.router.navigate(['/user'], { replaceUrl: true });
+      }
+    }
+  }
+
   onLogin() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
@@ -103,19 +125,28 @@ export class Authentication {
       password: this.loginForm.value.password!,
     };
 
-    this.authenticationService.login(loginRequest).subscribe({
+    this.authenticationService.loginUser(loginRequest).subscribe({
       next: (res) => {
         console.log('Logged in!', res);
-        this.router.navigate(['/admin']);
+        if (res.role === 'Admin') {
+          this.router.navigate(['/admin/']);
+        } else {
+          this.router.navigate(['/user']);
+        }
       },
-      error: () => alert('Invalid login credentials.'),
+      error: (err) => {
+        alert('Invalid login credentials.');
+      },
     });
   }
 
-  // onLogout() {
-  //   this.authenticationService.logout();
-  //   this.router.navigate(['/authentication']); // or your login route
-  // }
+  hideErrorMessage() {
+    setTimeout(() => {
+      this.errorMessageEmail = null;
+      this.errorMessageUsername = null;
+      this.errorMessage = null;
+    }, 3000);
+  }
 
   onRegister() {
     if (this.registerForm.invalid) {
@@ -132,12 +163,36 @@ export class Authentication {
       password: this.registerForm.value.password!,
     };
 
-    this.authenticationService.register(registerRequest).subscribe({
+    this.authenticationService.registerUser(registerRequest).subscribe({
       next: (res) => {
-        console.log('Registered!', res);
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/user']);
       },
-      error: () => alert('Registration failed'),
+      error: (err) => {
+        if (err.status === 400) {
+          const errors = err.error?.errors;
+
+          if (!errors) {
+            this.errorMessage = 'Something went wrong. Please try again.';
+            this.hideErrorMessage();
+            return;
+          }
+
+          errors.forEach((msg: string) => {
+            const lower = msg.toLowerCase();
+
+            if (lower.includes('email')) {
+              this.errorMessageEmail = msg;
+              this.hideErrorMessage();
+            } else if (lower.includes('username')) {
+              this.errorMessageUsername = msg;
+              this.hideErrorMessage();
+            } else {
+              this.errorMessage = msg;
+            }
+            this.hideErrorMessage();
+          });
+        }
+      },
     });
   }
 }

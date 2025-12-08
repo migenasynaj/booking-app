@@ -1,0 +1,34 @@
+.slide-notice {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0e7490;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 15px;
+  animation: slideUpDown 3s ease forwards;
+  z-index: 9999;
+  align-self: center;
+}
+
+.btn-primary {
+  background: #0e7490 !important;
+  border-color: #0e7490 !important;
+  color: #ffffff !important;
+}
+.btn-primary:hover {
+  background: #0891b2 !important;
+  border-color: #0891b2 !important;
+}
+.btn-primary:active {
+  background: #06b6d4 !important;
+  border-color: #06b6d4 !important;
+}
+
+.user-container {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}

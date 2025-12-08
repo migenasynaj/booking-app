@@ -20,8 +20,8 @@ export const environment = {
     },
     users: {
       getAll: `/Users`,
-      getById: (id: number) => `/Room/${id}`,
-      update: (id: number) => `/Room/${id}`,
+      getById: (id: string) => `/Users/${id}`,
+      update: (id: string) => `/Users/${id}`,
     },
     authentication: {
       login: '/Authentication/Login',

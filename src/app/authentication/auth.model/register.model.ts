@@ -7,9 +7,10 @@ export interface RegisterRequest {
   phoneNumber: string;
 }
 
-// export interface RegisterResponse {
-//   id: string;
-//   username: string;
-//   token: string;
-//   role: string;
-// }
+export interface RegisterResponse {
+  id: string | null;
+  username: string;
+  token: string;
+  role: string | null;
+  email?: string;
+}

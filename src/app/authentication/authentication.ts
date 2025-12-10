@@ -96,18 +96,14 @@ export class Authentication {
     this.mode = mode;
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('token');
-  }
-
   ngOnInit() {
-    const token = this.getToken();
+    const token = this.authenticationService.getToken();
 
     if (token) {
       const user = JSON.parse(localStorage.getItem('user')!);
 
       if (user.role === 'Admin') {
-        this.router.navigate(['/admin'], { replaceUrl: true });
+        this.router.navigate(['/admin/'], { replaceUrl: true });
       } else {
         this.router.navigate(['/user'], { replaceUrl: true });
       }
@@ -127,9 +123,9 @@ export class Authentication {
 
     this.authenticationService.loginUser(loginRequest).subscribe({
       next: (res) => {
-        console.log('Logged in!', res);
+        // console.log('Logged in!', res);
         if (res.role === 'Admin') {
-          this.router.navigate(['/admin/']);
+          this.router.navigate(['/admin']);
         } else {
           this.router.navigate(['/user']);
         }
@@ -149,6 +145,10 @@ export class Authentication {
   }
 
   onRegister() {
+    // console.log('%c NEW onRegister() CALLED!', 'color: red; font-size: 20px; font-weight: bold');
+
+    // console.log('onRegister() CALLED!');
+
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
@@ -165,9 +165,12 @@ export class Authentication {
 
     this.authenticationService.registerUser(registerRequest).subscribe({
       next: (res) => {
-        this.router.navigate(['/user']);
+        // console.log('%c REGISTER SUCCESS →', 'color: green; font-size: 18px', res);
+
+        this.router.navigate(['user']);
       },
       error: (err) => {
+        // console.log('REGISTER ERROR → ', err);
         if (err.status === 400) {
           const errors = err.error?.errors;
 
@@ -182,15 +185,13 @@ export class Authentication {
 
             if (lower.includes('email')) {
               this.errorMessageEmail = msg;
-              this.hideErrorMessage();
             } else if (lower.includes('username')) {
               this.errorMessageUsername = msg;
-              this.hideErrorMessage();
             } else {
               this.errorMessage = msg;
             }
-            this.hideErrorMessage();
           });
+          this.hideErrorMessage();
         }
       },
     });

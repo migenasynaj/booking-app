@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { LoginRequest, ResponseBody } from './auth.model/login.model';
-import { RegisterRequest } from './auth.model/register.model';
+import { RegisterRequest, RegisterResponse } from './auth.model/register.model';
 import { Observable, tap } from 'rxjs';
 @Injectable({
   providedIn: 'root',
@@ -24,14 +24,16 @@ export class AuthenticationService {
       );
   }
 
-  registerUser(data: RegisterRequest): Observable<ResponseBody> {
+  registerUser(data: RegisterRequest): Observable<RegisterResponse> {
     return this.http
-      .post<ResponseBody>(
+      .post<RegisterResponse>(
         `${environment.apiUrl}${environment.endpoints.authentication.register}`,
         data
       )
       .pipe(
         tap((res) => {
+          if (!res.role) res.role = 'User';
+
           localStorage.setItem('token', res.token);
           localStorage.setItem('user', JSON.stringify(res));
         })
@@ -45,5 +47,28 @@ export class AuthenticationService {
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  isTokenExpired(): boolean {
+    const token = this.getToken();
+    if (!token) return true;
+
+    try {
+      const payload = token.split('.')[1];
+      const decoded = JSON.parse(atob(payload));
+
+      const exp = decoded.exp;
+      if (!exp) return true;
+
+      const isExpired = Date.now() > exp * 1000;
+
+      return isExpired;
+    } catch (err) {
+      return true;
+    }
   }
 }

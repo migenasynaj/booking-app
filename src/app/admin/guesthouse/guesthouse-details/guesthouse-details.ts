@@ -1,8 +1,9 @@
 import { Component, inject, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { GuesthouseService } from '../guesthouse-service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Guesthouse, GuesthouseCreateModel } from '../g-model/guesthouse.model';
+import { Guesthouse } from '../../../shared-model/guesthouse.model';
+import { GuesthouseService } from '../../../shared-services/guesthouse-service';
+import { GuesthouseCreateModel } from '../g-model/guesthouse-create.model';
 
 @Component({
   selector: 'app-guesthouse-details',

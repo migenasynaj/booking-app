@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../../../environments/environment';
-import { Guesthouse, GuesthouseCreateModel } from './g-model/guesthouse.model';
+import { environment } from '../../../environments/environment';
+import { Guesthouse } from '../shared-model/guesthouse.model';
+import { GuesthouseCreateModel } from '../admin/guesthouse/g-model/guesthouse-create.model';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +40,12 @@ export class GuesthouseService {
   deleteGuesthouseById(id: number) {
     return this.http.delete<void>(
       `${environment.apiUrl}${environment.endpoints.guesthouse.delete(id)}`
+    );
+  }
+
+  getTopFive() {
+    return this.http.get<Guesthouse[]>(
+      `${environment.apiUrl}${environment.endpoints.guesthouse.getTopFive}`
     );
   }
 }

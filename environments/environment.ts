@@ -9,6 +9,7 @@ export const environment = {
       create: '/Guesthouse',
       update: (id: number) => `/Guesthouse/${id}`,
       delete: (id: number) => `/Guesthouse/${id}`,
+      getTopFive: '/Guesthouse/top-five',
     },
     room: {
       getAll: '/Room',
@@ -17,15 +18,20 @@ export const environment = {
       getByGuesthouseId: (guesthouseId: number) => `/Room/Guesthouse/${guesthouseId}`,
       update: (id: number) => `/Room/${id}`,
       delete: (id: number) => `/Room/${id}`,
+      book: '/Room/Book',
     },
     users: {
-      getAll: `/Users`,
+      getAll: '/Users',
       getById: (id: string) => `/Users/${id}`,
       update: (id: string) => `/Users/${id}`,
     },
     authentication: {
       login: '/Authentication/Login',
       register: '/Authentication/Register',
+    },
+    bookings: {
+      getById: (roomId: string) => `/Bookings/${roomId}`,
+      getAll: (userId: number) => `/Bookings/User/${userId}`,
     },
   },
 };

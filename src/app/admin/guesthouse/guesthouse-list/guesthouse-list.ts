@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { GuesthouseService } from '../guesthouse-service';
 import { Subject, takeUntil } from 'rxjs';
-import { Guesthouse } from '../g-model/guesthouse.model';
+import { Guesthouse } from '../../../shared-model/guesthouse.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GuesthouseDetails } from '../guesthouse-details/guesthouse-details';
+import { AuthenticationService } from '../../../authentication/authentication.service';
+import { GuesthouseService } from '../../../shared-services/guesthouse-service';
 
 @Component({
   selector: 'app-guesthouse-list',
@@ -20,6 +21,7 @@ export class GuesthouseList {
   error: string | null = null;
   loading = true;
   successMessage: string | null = null;
+  private authService = inject(AuthenticationService);
 
   ngOnInit() {
     this.guesthouseService

@@ -1,1 +1,48 @@
-<p>user-layout works!</p>
+<div class="layout">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white px-4">
+    <a class="navbar-brand fw-bold" routerLink="./user">BookingApp</a>
+
+    <ul class="navbar-nav ms-4">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/user">Home</a>
+      </li>
+
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/user/profile/details">Profile</a>
+      </li>
+
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/user/guesthouses">Guesthouses</a>
+      </li>
+    </ul>
+
+    <div class="ms-auto">
+      <button class="btn btn-outline-danger btn-sm" (click)="onLogout()">
+        <i class="bi bi-person"></i> Logout
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container mt-4">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <footer class="footer bg-body-tertiary text-center text-lg-start">
+    <div class="text-center footer-background p-3">
+      © 2025 BookingApp
+      <div class="row">
+        <div class="col-6 col-sm-4" routerLinkActive="active">
+          <a class="text-body" routerLink="/user">Home</a>
+        </div>
+        <div class="col-6 col-sm-4" routerLinkActive="active">
+          <a class="text-body" routerLink="/user">Contact Us</a>
+        </div>
+        <div class="col-6 col-sm-4" routerLinkActive="active">
+          <a class="text-body" routerLink="/user">About</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

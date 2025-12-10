@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
-import { routes as adminRouter } from './admin/admin.routing';
+import { adminRouter } from './admin/admin.routing';
 import { AuthGuard } from './authentication/auth-guard';
 import { roleGuard } from './authentication/role-guard';
+import { userRouter } from './user-dashboard/user.routing';
 
 export const routes: Routes = [
   {
@@ -26,5 +27,6 @@ export const routes: Routes = [
       import('./user-dashboard/user-layout/user-layout').then((m) => m.UserLayout),
     canActivate: [AuthGuard, roleGuard],
     data: { roles: ['User'] },
+    children: userRouter,
   },
 ];

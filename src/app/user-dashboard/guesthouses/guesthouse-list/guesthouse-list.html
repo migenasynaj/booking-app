@@ -1,0 +1,18 @@
+<div class="row g-4">
+  @for (gh of guesthouse; track gh.id) {
+  <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="top-five-card">
+      <div class="image-wrapper">
+        <img src="./relaxing-and-serene-atmosphere.jpg" class="card-img" alt="{{ gh.name }}" />
+      </div>
+      <h3 class="card-title">{{ gh.name }}</h3>
+      <p class="card-description">{{ gh.description }}</p>
+    </div>
+    <div>
+      <button class="button" [routerLink]="['/user/guesthouse', gh.id, 'rooms']">
+        View Details
+      </button>
+    </div>
+  </div>
+  }
+</div>

@@ -1,0 +1,26 @@
+.nav-link.active {
+  font-weight: bold;
+  color: #d9534f !important;
+}
+
+.navbar-brand {
+  color: #c2b7ac !important;
+}
+
+.navbar {
+  background: #ffffff !important;
+  border-bottom: 1px solid #d1d5db;
+  color: #111827;
+}
+.footer {
+  margin-top: auto;
+}
+.footer-background {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

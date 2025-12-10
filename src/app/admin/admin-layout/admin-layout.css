@@ -15,20 +15,20 @@
   background: #e5e7eb;
 }
 
-/* Active Route Style */
+
 .active-link {
   background: #0e7490 !important;
   color: #ffffff !important;
 }
 
-/* Content spacing */
+
 .content-area {
   background: #f3f4f6;
   min-height: calc(100vh - 56px);
   padding: 25px;
 }
 
-/* Navbar brand text */
+
 .navbar-brand {
   color: #0e7490 !important;
 }

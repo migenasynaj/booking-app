@@ -1,9 +1,9 @@
 import { Component, inject, Input } from '@angular/core';
-import { RoomService } from '../room-service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreateRoomModel, Room } from '../r-model/room-list.model';
 import { Amenities } from '../enum';
+import { RoomService } from '../../../shared-services/room-service';
 
 @Component({
   selector: 'app-room-details',

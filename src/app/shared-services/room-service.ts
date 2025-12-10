@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CreateRoomModel, Room } from './r-model/room-list.model';
+import { CreateRoomModel, Room } from '../admin/room/r-model/room-list.model';
 
 @Injectable({
   providedIn: 'root',

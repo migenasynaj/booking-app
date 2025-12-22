@@ -1,21 +1,33 @@
-<section class="top-five-section">
-  <h2 class="section-title mt-3">Top 4 Guesthouses</h2>
-  <div class="row g-4">
-    @for (gh of guesthouse; track gh.id) {
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a class="card-link" [routerLink]="['/user/guesthouse', gh.id, 'rooms']">
-        <div class="top-five-card">
-          <div class="image-wrapper">
-            <img src="./relaxing-and-serene-atmosphere.jpg" class="card-img" alt="{{ gh.name }}" />
+<div>
+  <div>
+    <app-search-guesthouse (searchAvailableGuesthouses)="showAvailableGuesthouses($event)">
+    </app-search-guesthouse>
+  </div>
+  <div>
+    <section class="top-five-section">
+      <h2 class="section-title mt-3">Top 5 Booked Guesthouses</h2>
+      <div class="row g-4 justify-content-center">
+        @for (gh of guesthouse; track gh.id) {
+        <div class="col-12 col-sm-6 col-md-4">
+          <!-- <a class="card-link" [routerLink]="['/user/guesthouse', gh.id, 'rooms']"> -->
+          <div class="top-five-card">
+            <div class="image-wrapper">
+              <img
+                src="./relaxing-and-serene-atmosphere.jpg"
+                class="card-img"
+                alt="{{ gh.name }}"
+              />
+            </div>
+            <h3 class="card-title">{{ gh.name }}</h3>
+            <p class="card-description">{{ gh.description }}</p>
           </div>
-          <h3 class="card-title">{{ gh.name }}</h3>
-          <p class="card-description">{{ gh.description }}</p>
+          <!-- </a> -->
         </div>
-      </a>
-    </div>
-    }
+        }
+      </div>
+      <!-- <div class="show-all-wrapper">
+        <button class="show-all-btn" routerLink="/user/guesthouses">Show All Guesthouses</button>
+      </div> -->
+    </section>
   </div>
-  <div class="show-all-wrapper">
-    <button class="show-all-btn" [routerLink]="['/user/guesthouses']">Show All Guesthouses</button>
-  </div>
-</section>
+</div>

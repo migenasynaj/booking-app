@@ -14,7 +14,7 @@ export const userRouter: Routes = [
   },
 
   {
-    path: 'guesthouse/:id/rooms',
+    path: 'guesthouse/:guesthouseId/rooms',
     loadComponent: () => import('./room/room-list/room-list').then((m) => m.RoomList),
   },
 

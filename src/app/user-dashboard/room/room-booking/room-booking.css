@@ -1,0 +1,25 @@
+.booking-modal {
+  border-radius: 1.25rem;
+}
+.booking-modal .modal-title {
+  color: #1f2937;
+}
+
+.btn-book {
+  background-color: #cbbfb4;
+  border-color: #cbbfb4;
+  color: #ffffff;
+}
+
+.btn-book:hover,
+.btn-book:focus {
+  background-color: #b8aa9e;
+  border-color: #b8aa9e;
+}
+
+ngb-datepicker {
+  /* position: relative; */
+  padding: 0.75rem;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+}

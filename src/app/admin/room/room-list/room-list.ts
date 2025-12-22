@@ -3,10 +3,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Guesthouse } from '../../../shared-model/guesthouse.model';
 import { RoomDetails } from '../room-details/room-details';
 import { Subject, takeUntil } from 'rxjs';
-import { Room } from '../r-model/room-list.model';
-import { Amenities } from '../enum';
+import { Amenities } from '../../../shared-model/enum';
 import { GuesthouseService } from '../../../shared-services/guesthouse-service';
 import { RoomService } from '../../../shared-services/room-service';
+import { Room } from '../../../shared-model/room-list.model';
 
 @Component({
   selector: 'app-room-list',

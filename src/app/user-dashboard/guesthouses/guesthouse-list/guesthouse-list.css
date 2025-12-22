@@ -1,0 +1,86 @@
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.top-card {
+  text-align: left;
+  padding: 10px;
+}
+.top-card:hover {
+  transform: translateY(-4px);
+}
+
+.img-wrapper {
+  overflow: hidden;
+  border-radius: 6px;
+}
+.card-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 6px;
+  transition: transform 0.4s ease;
+}
+
+.top-card:hover .card-img {
+  transform: scale(1.06);
+}
+
+.card-title {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #222;
+}
+
+.card-description {
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.button {
+  background-color: #c2b7ac;
+  color: white;
+  padding: 14px 34px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 4px;
+  width: 100%;
+}
+.button:hover {
+  background-color: #a79b90;
+}
+
+.pagination .page-link {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #5a4a42;
+  font-weight: 500;
+  padding: 6px 10px;
+  transition: color 0.2s ease;
+}
+
+.pagination .page-link:hover {
+  color: #3f342d;
+  text-decoration: underline;
+}
+
+.pagination .page-item.active .page-link {
+  color: #000000;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #b9a99b;
+  text-decoration: none;
+  cursor: default;
+}
+
+.pagination {
+  margin-bottom: 0px !important;
+}

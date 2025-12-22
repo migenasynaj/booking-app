@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Guesthouse } from '../shared-model/guesthouse.model';
 import { GuesthouseCreateModel } from '../admin/guesthouse/g-model/guesthouse-create.model';
+import { SearchGuesthouses } from '../user-dashboard/guesthouses/guesthouses.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +11,25 @@ import { GuesthouseCreateModel } from '../admin/guesthouse/g-model/guesthouse-cr
 export class GuesthouseService {
   private http = inject(HttpClient);
 
-  getGuesthouse() {
-    console.log(`${environment.apiUrl}${environment.endpoints.guesthouse.getAll}`);
+  // getGuesthouse() {
+  //   console.log(`${environment.apiUrl}${environment.endpoints.guesthouse.getAll}`);
+  //   return this.http.get<Guesthouse[]>(
+  //     `${environment.apiUrl}${environment.endpoints.guesthouse.getAll}`
+  //   );
+  // }
+
+  getGuesthouse(searchParams?: SearchGuesthouses) {
     return this.http.get<Guesthouse[]>(
-      `${environment.apiUrl}${environment.endpoints.guesthouse.getAll}`
+      `${environment.apiUrl}${environment.endpoints.guesthouse.getAll}`,
+      {
+        params: searchParams
+          ? {
+              checkIn: searchParams.checkIn,
+              checkOut: searchParams.checkOut,
+              numberOfBeds: searchParams.numberOfBeds,
+            }
+          : {},
+      }
     );
   }
 

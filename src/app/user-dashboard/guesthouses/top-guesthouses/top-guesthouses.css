@@ -52,7 +52,7 @@
   line-height: 1.6;
 }
 
-.show-all-wrapper {
+/* .show-all-wrapper {
   display: flex;
   justify-content: center;
   margin-top: 40px;
@@ -70,4 +70,4 @@
 }
 .show-all-btn:hover {
   background-color: #a79b90;
-}
+} */

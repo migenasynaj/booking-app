@@ -1,18 +1,44 @@
+<!-- <div>
+  <app-search-guesthouse (searchAvailableGuesthouses)="showAvailableGuesthouses($event)">
+  </app-search-guesthouse>
+</div> -->
 <div class="row g-4">
-  @for (gh of guesthouse; track gh.id) {
-  <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-    <div class="top-five-card">
+  @for (gh of displayedGuesthouses; track gh.id) {
+  <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+    <div class="top-card d-flex flex-column h-100">
       <div class="image-wrapper">
         <img src="./relaxing-and-serene-atmosphere.jpg" class="card-img" alt="{{ gh.name }}" />
       </div>
+
       <h3 class="card-title">{{ gh.name }}</h3>
-      <p class="card-description">{{ gh.description }}</p>
-    </div>
-    <div>
-      <button class="button" [routerLink]="['/user/guesthouse', gh.id, 'rooms']">
-        View Details
-      </button>
+
+      <p class="card-description flex-grow-1">
+        {{ gh.description }}
+      </p>
+
+      <div class="show-all-wrapper">
+        <button class="button mt-auto" [routerLink]="['/user/guesthouse', gh.id, 'rooms']">
+          View Details
+        </button>
+      </div>
     </div>
   </div>
   }
 </div>
+
+<nav aria-label="Guesthouse pagination" class="mt-4 d-flex justify-content-center">
+  <ul class="pagination">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a class="page-link" (click)="prevPage()">Previous</a>
+    </li>
+
+    @for (page of pages; track page) {
+    <li class="page-item" [class.active]="currentPage === page">
+      <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
+    </li>
+    }
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link" (click)="nextPage()">Next</a>
+    </li>
+  </ul>
+</nav>

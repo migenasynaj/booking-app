@@ -1,0 +1,39 @@
+<div class="container my-4">
+  <div class="container-text mb-3">
+    <p class="mb-0 fw-medium">
+      To see the list for available guesthouses you have to complete the form:
+    </p>
+  </div>
+
+  <form [formGroup]="form" class="search-form d-flex flex-wrap align-items-center gap-2 p-3">
+    <div class="search-input d-flex align-items-center flex-fill">
+      <span class="search-icon me-2">📅</span>
+      <input type="date" class="form-control" formControlName="checkIn" />
+    </div>
+
+    <div class="search-input d-flex align-items-center flex-fill">
+      <span class="search-icon me-2">📅</span>
+      <input type="date" class="form-control" formControlName="checkOut" />
+    </div>
+
+    <div class="search-input d-flex align-items-center flex-fill">
+      <span class="search-icon me-2">🛏️</span>
+      <input
+        type="number"
+        min="1"
+        class="form-control"
+        formControlName="numberOfBeds"
+        placeholder="Beds number"
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="btn search-btn"
+      [disabled]="form.invalid"
+      (click)="showAvailableGuesthouses()"
+    >
+      Show Available Guesthouses
+    </button>
+  </form>
+</div>

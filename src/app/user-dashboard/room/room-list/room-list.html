@@ -1,1 +1,61 @@
-<p>room-list works!</p>
+@if (successMessage) {
+<div class="slide-notice">
+  {{ successMessage }}
+</div>
+}
+<div class="container my-5">
+  <div class="row justify-content-center text-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <h3 class="room-intro">
+        A space designed for your comfort. Discover cozy rooms crafted with care, where every detail
+        is made to help you unwind.
+      </h3>
+    </div>
+  </div>
+</div>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10">
+      @for (room of room; track room.id) {
+      <div class="room-row mb-5">
+        <div class="row align-items-center g-4">
+          <div class="col-12 col-md-6">
+            <img
+              [src]="'data:image/jpeg;base64,' + room.image"
+              class="img-fluid room-image"
+              alt="{{ room.name }}"
+            />
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="room-content">
+              <h3 class="room-title">{{ room.name }}</h3>
+
+              <p class="room-description">
+                {{ room.description }}
+              </p>
+
+              <ul class="room-features">
+                <li><strong>Beds:</strong> {{ room.numberOfBeds }}</li>
+                <li>
+                  <strong>Amenities:</strong>
+                  @for (a of room.amenities; track a) {
+                  <div>{{ getAmenityName(a) }}</div>
+                  }
+                </li>
+              </ul>
+
+              <div class="room-footer">
+                <span class="room-price">{{ room.price }} $</span>
+                <span class="per-night">/ night</span>
+              </div>
+
+              <button class="btn btn-book mt-3" (click)="onBookRoom(room)">Book</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

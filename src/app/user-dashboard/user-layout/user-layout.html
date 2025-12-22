@@ -1,11 +1,11 @@
 <div class="layout">
   <nav class="navbar navbar-expand-lg navbar-light bg-white px-4">
-    <a class="navbar-brand fw-bold" routerLink="./user">BookingApp</a>
+    <a class="navbar-brand fw-bold" routerLink="/user">BookingApp</a>
 
     <ul class="navbar-nav ms-4">
-      <li class="nav-item" routerLinkActive="active">
+      <!-- <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="/user">Home</a>
-      </li>
+      </li> -->
 
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="/user/profile/details">Profile</a>
@@ -23,25 +23,49 @@
     </div>
   </nav>
 
-  <main>
+  <div class="main-content">
     <div class="container mt-4">
       <router-outlet></router-outlet>
     </div>
-  </main>
+  </div>
 
-  <footer class="footer bg-body-tertiary text-center text-lg-start">
-    <div class="text-center footer-background p-3">
-      © 2025 BookingApp
-      <div class="row">
-        <div class="col-6 col-sm-4" routerLinkActive="active">
-          <a class="text-body" routerLink="/user">Home</a>
+  <footer class="app-footer bg-light py-4 mt-5 border-top">
+    <div class="container">
+      <div class="row text-center justify-content-center">
+        <div class="col-md-4 mb-4 d-flex flex-column align-items-center">
+          <a routerLink="/user" class="footer-link"><h3 class="mt-3 mb-3">Home</h3></a>
+
+          <p class="footer-text">
+            Discover a variety of guesthouses across unique locations, each offering its own charm
+            and aesthetic. Whether you prefer modern city stays, cozy countryside retreats, or
+            peaceful lakeside escapes, our platform makes it easy to find the perfect place for your
+            next getaway.
+          </p>
         </div>
-        <div class="col-6 col-sm-4" routerLinkActive="active">
-          <a class="text-body" routerLink="/user">Contact Us</a>
+
+        <div class="col-md-4 mb-4 d-flex flex-column align-items-center">
+          <h3 class="mb-3">Contact Us</h3>
+          <ul class="list-unstyled footer-list">
+            <li>Hours: Mon-Fri, 9:00-18:00</li>
+            <li>Email: example@mail.com</li>
+            <li>Address: Your street 123</li>
+            <li>Phone: +123 456 789</li>
+          </ul>
         </div>
-        <div class="col-6 col-sm-4" routerLinkActive="active">
-          <a class="text-body" routerLink="/user">About</a>
+
+        <div class="col-md-4 mb-4 d-flex flex-column align-items-center">
+          <h3 class="mb-3">About</h3>
+          <p class="footer-text">
+            We started with one small guesthouse and, through dedication and a committed team, grew
+            into a trusted platform offering many unique stays. Today, we connect travelers with
+            guesthouses of different styles and locations, all built on our long-standing passion
+            for quality and hospitality.
+          </p>
         </div>
+      </div>
+
+      <div>
+        <p class="text-center text-muted mt-3 mb-0 copyright">© 2025 BookingApp</p>
       </div>
     </div>
   </footer>

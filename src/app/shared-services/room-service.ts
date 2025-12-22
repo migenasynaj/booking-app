@@ -2,7 +2,9 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CreateRoomModel, Room } from '../admin/room/r-model/room-list.model';
+import { Room } from '../shared-model/room-list.model';
+import { CreateRoomModel } from '../admin/room/r-model/create-room-list.model';
+import { roomBooking } from '../user-dashboard/room/room-booking-model';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +35,12 @@ export class RoomService {
 
   deleteRoomById(id: number) {
     return this.http.delete<void>(`${environment.apiUrl}${environment.endpoints.room.delete(id)}`);
+  }
+
+  bookRoom(booking: roomBooking) {
+    return this.http.post<roomBooking>(
+      `${environment.apiUrl}${environment.endpoints.room.book}`,
+      booking
+    );
   }
 }

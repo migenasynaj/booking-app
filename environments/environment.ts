@@ -30,7 +30,7 @@ export const environment = {
       register: '/Authentication/Register',
     },
     bookings: {
-      getById: (roomId: string) => `/Bookings/${roomId}`,
+      getByRoomId: (roomId: number) => `/Bookings/${roomId}`,
       getAll: (userId: number) => `/Bookings/User/${userId}`,
     },
   },

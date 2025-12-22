@@ -1,1 +1,50 @@
-<p>room-booking works!</p>
+<div class="modal-header border-0">
+  <h5 class="modal-title fw-semibold">Book {{ roomName }}</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="onCancel()"></button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="form">
+    @if (datepickerReady) {
+    <div class="row justify-content-center">
+      <div class="col-6 d-flex flex-column align-items-center">
+        <label class="form-label mb-2">
+          <strong>Check-in</strong>
+        </label>
+
+        <ngb-datepicker
+          formControlName="bookFrom"
+          [minDate]="minDate"
+          [markDisabled]="markDisabled"
+          [displayMonths]="1"
+          [outsideDays]="'hidden'"
+        >
+        </ngb-datepicker>
+      </div>
+
+      <div class="col-6 d-flex flex-column align-items-center">
+        <label class="form-label mb-2">
+          <strong>Check-out</strong>
+        </label>
+
+        <ngb-datepicker
+          formControlName="bookTo"
+          [minDate]="minDate"
+          [markDisabled]="markDisabled"
+          [displayMonths]="1"
+          [outsideDays]="'hidden'"
+        >
+        </ngb-datepicker>
+      </div>
+    </div>
+    }
+  </form>
+</div>
+
+<div class="modal-footer border-0 d-flex gap-2 justify-content-end">
+  <button class="btn btn-outline-secondary rounded-3 px-4" (click)="onCancel()">Cancel</button>
+
+  <button class="btn btn-book px-4 rounded-3" [disabled]="form.invalid" (click)="confirmBooking()">
+    Confirm booking
+  </button>
+</div>

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { UserService } from '../../../shared-services/user-service';
 import { Subject, takeUntil } from 'rxjs';
-import { User } from '../u-model/user-list.model';
+import { User } from '../../../shared-model/user-list.model';
 import { Router } from '@angular/router';
 
 @Component({

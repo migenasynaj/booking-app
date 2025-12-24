@@ -6,3 +6,10 @@ export interface User {
   phoneNumber: string;
   role: string;
 }
+
+// export interface UserEdit {
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+//   phoneNumber: string;
+// }

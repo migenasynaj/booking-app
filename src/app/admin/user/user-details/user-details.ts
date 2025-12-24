@@ -3,7 +3,7 @@ import { UserService } from '../../../shared-services/user-service';
 import { Subject, takeUntil } from 'rxjs';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { User } from '../u-model/user-list.model';
+import { User } from '../../../shared-model/user-list.model';
 
 @Component({
   selector: 'app-user-details',

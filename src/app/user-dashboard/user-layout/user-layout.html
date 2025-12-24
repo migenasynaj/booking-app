@@ -3,12 +3,8 @@
     <a class="navbar-brand fw-bold" routerLink="/user">BookingApp</a>
 
     <ul class="navbar-nav ms-4">
-      <!-- <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/user">Home</a>
-      </li> -->
-
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/user/profile/details">Profile</a>
+        <a class="nav-link" routerLink="/user/profile">Profile</a>
       </li>
 
       <li class="nav-item" routerLinkActive="active">
@@ -18,7 +14,7 @@
 
     <div class="ms-auto">
       <button class="btn btn-outline-danger btn-sm" (click)="onLogout()">
-        <i class="bi bi-person"></i> Logout
+        <i class="bi bi-person"></i> {{ username }}
       </button>
     </div>
   </nav>

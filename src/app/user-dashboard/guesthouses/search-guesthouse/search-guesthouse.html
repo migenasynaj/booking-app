@@ -8,32 +8,46 @@
   <form [formGroup]="form" class="search-form d-flex flex-wrap align-items-center gap-2 p-3">
     <div class="search-input d-flex align-items-center flex-fill">
       <span class="search-icon me-2">📅</span>
-      <input type="date" class="form-control" formControlName="checkIn" />
+      <input
+        class="form-control"
+        placeholder="mm/dd/yyyy"
+        formControlName="checkIn"
+        ngbDatepicker
+        #dpIn="ngbDatepicker"
+        [minDate]="minDate"
+        readonly
+        [outsideDays]="'hidden'"
+        (click)="dpIn.toggle()"
+      />
     </div>
 
     <div class="search-input d-flex align-items-center flex-fill">
       <span class="search-icon me-2">📅</span>
-      <input type="date" class="form-control" formControlName="checkOut" />
+      <input
+        class="form-control"
+        placeholder="mm/dd/yyyy"
+        formControlName="checkOut"
+        ngbDatepicker
+        #dpOut="ngbDatepicker"
+        [minDate]="minDate"
+        readonly
+        [outsideDays]="'hidden'"
+        (click)="dpOut.toggle()"
+      />
     </div>
 
     <div class="search-input d-flex align-items-center flex-fill">
       <span class="search-icon me-2">🛏️</span>
-      <input
-        type="number"
-        min="1"
-        class="form-control"
-        formControlName="numberOfBeds"
-        placeholder="Beds number"
-      />
+      <input type="number" min="1" class="form-control" formControlName="numberOfBeds" />
     </div>
 
     <button
       type="submit"
       class="btn search-btn"
       [disabled]="form.invalid"
-      (click)="showAvailableGuesthouses()"
+      (click)="showGuesthouses()"
     >
-      Show Available Guesthouses
+      Search
     </button>
   </form>
 </div>

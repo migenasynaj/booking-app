@@ -1,14 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { GuesthouseService } from '../../../shared-services/guesthouse-service';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { Guesthouse } from '../../../shared-model/guesthouse.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { SearchGuesthouses } from '../guesthouses.model';
-// import { SearchGuesthouse } from '../search-guesthouse/search-guesthouse';
+import { SearchGuesthouse } from '../search-guesthouse/search-guesthouse';
 
 @Component({
   selector: 'app-guesthouse-list',
-  imports: [RouterLink],
+  imports: [RouterLink, SearchGuesthouse],
   templateUrl: './guesthouse-list.html',
   styleUrl: './guesthouse-list.css',
 })
@@ -18,8 +18,11 @@ export class GuesthouseList {
   private activateRoute = inject(ActivatedRoute);
   private router = inject(Router);
 
+  private apiSub?: Subscription;
+
   error: string | null = null;
-  loading = true;
+  loading = false;
+  noAvailableGuesthouses = false;
 
   currentPage = 1;
   guesthousesPerPage = 6;
@@ -29,6 +32,10 @@ export class GuesthouseList {
   ngOnInit() {
     this.activateRoute.queryParams.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       console.log(' RAW query params:', params);
+
+      this.loading = true;
+      this.error = null;
+      this.noAvailableGuesthouses = false;
 
       let searchParams: SearchGuesthouses | undefined = undefined;
 
@@ -45,11 +52,22 @@ export class GuesthouseList {
         console.log(' searchParams sent to API:', searchParams);
       }
 
-      this.guesthouseService.getGuesthouse(searchParams).subscribe({
+      this.apiSub?.unsubscribe();
+
+      this.apiSub = this.guesthouseService.getGuesthouse(searchParams).subscribe({
         next: (data) => {
           console.log(' API RESPONSE (guesthouses):', data);
           this.allGuesthouses = data;
           console.log(this.allGuesthouses);
+          this.loading = false;
+
+          if (data.length === 0) {
+            this.error = null;
+            this.noAvailableGuesthouses = true;
+            this.displayedGuesthouses = [];
+            return;
+          }
+
           this.updateDisplayedGuesthouses();
         },
         error: (err) => {
@@ -61,15 +79,16 @@ export class GuesthouseList {
     });
   }
 
-  // showAvailableGuesthouses(searchParams: SearchGuesthouses): void {
-  //   this.router.navigate(['/user/guesthouses'], {
-  //     queryParams: {
-  //       checkIn: searchParams.checkIn,
-  //       checkOut: searchParams.checkOut,
-  //       numberOfBeds: searchParams.numberOfBeds,
-  //     },
-  //   });
-  // }
+  showAvailableGuesthouses(searchParams: SearchGuesthouses): void {
+    this.loading = true;
+    this.router.navigate(['/user/guesthouses'], {
+      queryParams: {
+        checkIn: searchParams.checkIn,
+        checkOut: searchParams.checkOut,
+        numberOfBeds: searchParams.numberOfBeds,
+      },
+    });
+  }
 
   updateDisplayedGuesthouses() {
     const firstGuesthouse = (this.currentPage - 1) * this.guesthousesPerPage;
@@ -110,6 +129,7 @@ export class GuesthouseList {
   }
 
   ngOnDestroy(): void {
+    this.apiSub?.unsubscribe();
     this.destroy$.next();
     this.destroy$.complete();
   }

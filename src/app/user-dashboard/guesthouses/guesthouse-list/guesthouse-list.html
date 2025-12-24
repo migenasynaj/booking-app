@@ -1,7 +1,27 @@
-<!-- <div>
-  <app-search-guesthouse (searchAvailableGuesthouses)="showAvailableGuesthouses($event)">
+<div>
+  <app-search-guesthouse
+    [isLoading]="loading"
+    (searchAvailableGuesthouses)="showAvailableGuesthouses($event)"
+  >
   </app-search-guesthouse>
-</div> -->
+</div>
+
+@if (loading) {
+<div class="d-flex justify-content-center mt-4">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+} @if (!loading && error) {
+<div class="alert alert-danger mt-4">
+  {{ error }}
+</div>
+} @if (!loading && !error && noAvailableGuesthouses) {
+<div class="alert alert-warning mt-4">
+  <strong>No guesthouses available</strong><br />
+  There are no guesthouses available for the selected dates. Please try different dates.
+</div>
+} @if (!loading && !error && !noAvailableGuesthouses) {
 <div class="row g-4">
   @for (gh of displayedGuesthouses; track gh.id) {
   <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
@@ -26,6 +46,7 @@
   }
 </div>
 
+@if (totalPages > 1) {
 <nav aria-label="Guesthouse pagination" class="mt-4 d-flex justify-content-center">
   <ul class="pagination">
     <li class="page-item" [class.disabled]="currentPage === 1">
@@ -34,11 +55,15 @@
 
     @for (page of pages; track page) {
     <li class="page-item" [class.active]="currentPage === page">
-      <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
+      <a class="page-link" (click)="goToPage(page)">
+        {{ page }}
+      </a>
     </li>
     }
+
     <li class="page-item" [class.disabled]="currentPage === totalPages">
       <a class="page-link" (click)="nextPage()">Next</a>
     </li>
   </ul>
 </nav>
+} }

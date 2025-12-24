@@ -1,6 +1,9 @@
 <div>
   <div>
-    <app-search-guesthouse (searchAvailableGuesthouses)="showAvailableGuesthouses($event)">
+    <app-search-guesthouse
+      [isLoading]="loading"
+      (searchAvailableGuesthouses)="showAvailableGuesthouses($event)"
+    >
     </app-search-guesthouse>
   </div>
   <div>
@@ -9,7 +12,6 @@
       <div class="row g-4 justify-content-center">
         @for (gh of guesthouse; track gh.id) {
         <div class="col-12 col-sm-6 col-md-4">
-          <!-- <a class="card-link" [routerLink]="['/user/guesthouse', gh.id, 'rooms']"> -->
           <div class="top-five-card">
             <div class="image-wrapper">
               <img
@@ -21,13 +23,9 @@
             <h3 class="card-title">{{ gh.name }}</h3>
             <p class="card-description">{{ gh.description }}</p>
           </div>
-          <!-- </a> -->
         </div>
         }
       </div>
-      <!-- <div class="show-all-wrapper">
-        <button class="show-all-btn" routerLink="/user/guesthouses">Show All Guesthouses</button>
-      </div> -->
     </section>
   </div>
 </div>

@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { BookedDateResponse } from './room/room-booking-model';
+import { BookedDateResponse, BookingDetails } from './room/room-booking-model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class Bookings {
+export class BookingService {
   private http = inject(HttpClient);
 
   getBookingsPerRoom(roomId: number) {
@@ -15,5 +15,9 @@ export class Bookings {
     );
   }
 
-  getBookingPerUser() {}
+  getBookingPerUser(userId: string) {
+    return this.http.get<BookingDetails[]>(
+      `${environment.apiUrl}${environment.endpoints.bookings.getAll(userId)}`
+    );
+  }
 }

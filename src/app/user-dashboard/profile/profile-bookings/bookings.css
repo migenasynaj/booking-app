@@ -1,0 +1,22 @@
+.btn {
+  background-color: #cbbfb4;
+  border-color: #cbbfb4;
+  color: #ffffff;
+}
+.btn:hover {
+  background-color: #b8aa9e;
+  border-color: #b8aa9e;
+}
+.image-wrapper {
+  width: 120px;
+  height: 90px;
+  overflow: hidden;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

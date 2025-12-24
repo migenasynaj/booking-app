@@ -31,7 +31,7 @@ export const environment = {
     },
     bookings: {
       getByRoomId: (roomId: number) => `/Bookings/${roomId}`,
-      getAll: (userId: number) => `/Bookings/User/${userId}`,
+      getAll: (userId: string) => `/Bookings/User/${userId}`,
     },
   },
 };

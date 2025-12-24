@@ -28,6 +28,7 @@ export class TopGuesthouses {
       .subscribe({
         next: (data) => {
           this.guesthouse = data;
+          this.loading = false;
         },
         error: () => {
           this.error = 'Failed to load guesthouses';
@@ -37,6 +38,7 @@ export class TopGuesthouses {
   }
 
   showAvailableGuesthouses(searchParams: SearchGuesthouses): void {
+    this.loading = true;
     this.router.navigate(['/user/guesthouses'], {
       queryParams: {
         checkIn: searchParams.checkIn,

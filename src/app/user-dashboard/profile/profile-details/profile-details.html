@@ -1,1 +1,79 @@
-<p>profile-details works!</p>
+<div class="row">
+  <div class="col-3">
+    <div class="d-flex flex-column gap-2">
+      <button class="btn text-start" routerLink="/user/profile/details">Profile details</button>
+
+      <button class="btn text-start" routerLink="/user/profile/bookings">Booking details</button>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <h2>Profile details</h2>
+    @if (loading) {
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status"></div>
+    </div>
+    } @else {
+
+    <p>Update your personal information</p>
+
+    <form [formGroup]="form">
+      <table class="table align-middle">
+        <tr>
+          <th>Name</th>
+          <td>
+            @if (!isEditing) {
+            <span>{{ user.firstName }}</span>
+            } @else {
+            <input class="form-control" formControlName="firstName" />
+            }
+          </td>
+        </tr>
+        <tr>
+          <th>Surname</th>
+          <td>
+            @if (!isEditing) {
+            <span>{{ user.lastName }}</span>
+            } @else {
+            <input class="form-control" formControlName="lastName" />
+            }
+          </td>
+        </tr>
+
+        <tr>
+          <th>Email</th>
+          <td>
+            @if (!isEditing) {
+            <span>{{ user.email }}</span>
+            } @else {
+            <input class="form-control" formControlName="email" />
+            }
+          </td>
+        </tr>
+
+        <tr>
+          <th>Phone</th>
+          <td>
+            @if (!isEditing) {
+            <span>{{ user.phoneNumber }}</span>
+            } @else {
+            <input class="form-control" formControlName="phoneNumber" />
+            }
+          </td>
+        </tr>
+      </table>
+      <hr />
+    </form>
+
+    <div class="d-flex justify-content-end mt-3">
+      @if (!isEditing) {
+      <button class="btn btn-outline-primary" (click)="enableEdit()">Edit</button>
+      } @else {
+      <button class="btn btn-success me-2" (click)="save()">Save</button>
+
+      <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+      }
+    </div>
+    }
+  </div>
+</div>

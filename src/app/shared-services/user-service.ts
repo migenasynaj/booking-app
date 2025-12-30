@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { User } from '../shared-model/user-list.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { User } from '../shared-model/user-list.model';
 export class UserService {
   private http = inject(HttpClient);
 
-  getUser() {
+  getUser(): Observable<User[]> {
     return this.http.get<User[]>(`${environment.apiUrl}${environment.endpoints.users.getAll}`);
   }
 

@@ -5,16 +5,16 @@ import { ResponseBody } from '../authentication/auth.model/login.model';
   providedIn: 'root',
 })
 export class LoggedUserService {
-  getCurrentUser(): ResponseBody | null {
+  getCurrentUser() {
     const user = localStorage.getItem('user');
     return user ? (JSON.parse(user) as ResponseBody) : null;
   }
 
-  getUserId(): string | null {
+  getUserId() {
     return this.getCurrentUser()?.id ?? null;
   }
 
-  getUsername(): string | null {
+  getUsername() {
     return this.getCurrentUser()?.username ?? null;
   }
 }

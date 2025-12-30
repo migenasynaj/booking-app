@@ -34,9 +34,7 @@ export class ProfileDetails {
     this.loadUser();
   }
 
-  private loadUser(): void {
-    console.log('Calling backend with userId:', this.userId);
-
+  private loadUser() {
     this.userService.getUserById(this.userId).subscribe({
       next: (user) => {
         this.user = user;
@@ -58,22 +56,15 @@ export class ProfileDetails {
     });
   }
 
-  enableEdit(): void {
+  enableEdit() {
     this.isEditing = true;
   }
 
-  cancel(): void {
+  cancel() {
     this.isEditing = false;
-
-    this.form.setValue({
-      firstName: this.user.firstName,
-      lastName: this.user.lastName,
-      email: this.user.email,
-      phoneNumber: this.user.phoneNumber,
-    });
   }
 
-  save(): void {
+  save() {
     if (this.form.invalid) return;
 
     const updatedData = this.form.getRawValue();

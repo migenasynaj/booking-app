@@ -3,8 +3,3 @@ export interface Guesthouse {
   name: string;
   description: string;
 }
-
-// export interface GuesthouseCreateModel {
-//   name: string;
-//   description: string;
-// }

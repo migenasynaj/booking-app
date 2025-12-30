@@ -31,8 +31,6 @@ export class GuesthouseList {
 
   ngOnInit() {
     this.activateRoute.queryParams.pipe(takeUntil(this.destroy$)).subscribe((params) => {
-      console.log(' RAW query params:', params);
-
       this.loading = true;
       this.error = null;
       this.noAvailableGuesthouses = false;
@@ -48,15 +46,12 @@ export class GuesthouseList {
           checkOut: params['checkOut'],
           numberOfBeds: Number(params['numberOfBeds']),
         };
-
-        console.log(' searchParams sent to API:', searchParams);
       }
 
       this.apiSub?.unsubscribe();
 
       this.apiSub = this.guesthouseService.getGuesthouse(searchParams).subscribe({
         next: (data) => {
-          console.log(' API RESPONSE (guesthouses):', data);
           this.allGuesthouses = data;
           console.log(this.allGuesthouses);
           this.loading = false;

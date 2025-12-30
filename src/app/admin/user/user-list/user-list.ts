@@ -18,23 +18,30 @@ export class UserList {
   user!: User[];
   error: string | null = null;
   loading = true;
+  state: 'loading' | 'error' | 'empty' | 'data' = 'loading';
+  message!: string;
 
   editUser(id: string) {
-    // console.log('Editing user with ID:', id);
     this.router.navigate(['/admin/users', id]);
   }
 
   ngOnInit() {
+    this.state = 'loading';
     this.userService
       .getUser()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => {
           this.user = data;
+          if (data.length === 0) {
+            this.state = 'empty';
+          } else {
+            this.state = 'data';
+          }
         },
         error: () => {
           this.error = 'Failed to load users. Please try again later.';
-          this.loading = false;
+          this.state = 'error';
         },
       });
   }

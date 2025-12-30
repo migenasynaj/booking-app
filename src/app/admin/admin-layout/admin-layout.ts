@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthenticationService } from '../../authentication/authentication.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserLogOut } from '../../shared-component/user-log-out/user-log-out';
 
 @Component({
   selector: 'app-admin-layout',
@@ -11,9 +13,22 @@ import { AuthenticationService } from '../../authentication/authentication.servi
 export class AdminLayout {
   private authenticationService = inject(AuthenticationService);
   private router = inject(Router);
+  private modalService = inject(NgbModal);
 
+  // onLogout() {
+  //   this.authenticationService.logout();
+  //   this.router.navigate(['/auth']);
+  // }
   onLogout() {
-    this.authenticationService.logout();
-    this.router.navigate(['/auth']);
+    const modalRef = this.modalService.open(UserLogOut, {
+      centered: true,
+    });
+
+    modalRef.result.then((confirmed) => {
+      if (confirmed) {
+        this.authenticationService.logout();
+        this.router.navigate(['/auth']);
+      }
+    });
   }
 }

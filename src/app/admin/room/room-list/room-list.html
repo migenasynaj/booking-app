@@ -21,7 +21,10 @@
     </div>
   </div>
 
-  @if (selectedGuesthouseId) {
+  @if (!selectedGuesthouseId) {
+  <!-- <div class="text-center text-muted py-4">Select a guesthouse to view its rooms.</div> -->
+
+  } @else {
 
   <div class="rooms-container mt-4 p-3">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -30,12 +33,20 @@
       </button>
     </div>
 
-    @if(roomsLoading){
+    @if (roomsLoading) {
     <div class="text-center py-4">
-      <div class="spinner-border text-primary" role="status"></div>
+      <div class="spinner-border text-primary"></div>
       <p class="mt-2">Loading rooms...</p>
     </div>
-    } @if(!roomsLoading){
+
+    } @else if (rooms.length === 0) {
+
+    <div class="text-center text-muted py-4">
+      This guesthouse has no rooms yet. Use “Create Room” to add one.
+    </div>
+
+    } @else {
+
     <div class="table-responsive">
       <table class="table table-hover align-middle bg-white shadow-sm">
         <thead class="table-light">
@@ -54,12 +65,9 @@
             <td>{{ room.name }}</td>
             <td>{{ room.numberOfBeds }}</td>
             <td>{{ room.price }} €</td>
-            <td>
+            <td class="d-flex">
               @for (a of room.amenities; track a) {
-              <div>
-                {{ getAmenityName(a) }}
-              </div>
-              }
+              {{ getAmenityName(a) }}, &nbsp; }
             </td>
             <td>
               <button class="btn btn-primary btn-sm me-2" (click)="onEdit(room)">

@@ -145,10 +145,6 @@ export class Authentication {
   }
 
   onRegister() {
-    // console.log('%c NEW onRegister() CALLED!', 'color: red; font-size: 20px; font-weight: bold');
-
-    // console.log('onRegister() CALLED!');
-
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
@@ -165,12 +161,9 @@ export class Authentication {
 
     this.authenticationService.registerUser(registerRequest).subscribe({
       next: (res) => {
-        // console.log('%c REGISTER SUCCESS →', 'color: green; font-size: 18px', res);
-
         this.router.navigate(['user']);
       },
       error: (err) => {
-        // console.log('REGISTER ERROR → ', err);
         if (err.status === 400) {
           const errors = err.error?.errors;
 

@@ -24,7 +24,6 @@ export class GuesthouseDetails {
   error: string | null = null;
 
   form = new FormGroup({
-    // id: new FormControl<number | null>(null),
     name: new FormControl<string>('', {
       validators: [Validators.required, Validators.maxLength(20), Validators.minLength(3)],
     }),
@@ -84,7 +83,6 @@ export class GuesthouseDetails {
 
   onSave() {
     if (this.form.invalid) {
-      // console.log('invalid form!', this.form.getRawValue());
       this.form.markAllAsTouched();
       return;
     }
@@ -94,14 +92,14 @@ export class GuesthouseDetails {
       description: this.form.value.description!,
     };
     this.service.updateGuesthouse(this.guesthouseId, updatedGuesthouse).subscribe({
-      next: () => this.activeModal.close('saved'),
+      next: () => this.activeModal.close(updatedGuesthouse),
       error: () => alert('Failed to update guesthouse'),
     });
   }
 
   onDelete() {
     this.service.deleteGuesthouseById(this.guesthouseId).subscribe({
-      next: () => this.activeModal.close('deleted'),
+      next: () => this.activeModal.close(this.guesthouseId),
       error: () => alert('Failed to delete guesthouse'),
     });
   }
@@ -122,8 +120,42 @@ export class GuesthouseDetails {
     };
 
     this.service.createGuesthouse(newGuesthouse).subscribe({
-      next: () => this.activeModal.close('created'),
+      next: () => {
+        this.activeModal.close('create');
+      },
+
       error: () => alert('Failed to create guesthouse'),
     });
   }
+
+  // onSubmit() {
+  //   if (this.form.invalid) {
+  //     this.form.markAllAsTouched();
+  //     return;
+  //   }
+
+  //   const payload = {
+  //     name: this.form.value.name!,
+  //     description: this.form.value.description!,
+  //   };
+
+  //   if (this.mode === 'create') {
+  //     this.service.createGuesthouse(payload).subscribe({
+  //       next: () => this.activeModal.close('created'),
+  //       error: () => alert('Failed to create guesthouse'),
+  //     });
+  //   }
+
+  //   if (this.mode === 'edit') {
+  //     const updatedGuesthouse = {
+  //       ...this.guesthouse,
+  //       ...payload,
+  //     };
+
+  //     this.service.updateGuesthouse(this.guesthouseId, updatedGuesthouse).subscribe({
+  //       next: () => this.activeModal.close('saved'),
+  //       error: () => alert('Failed to update guesthouse'),
+  //     });
+  //   }
+  // }
 }

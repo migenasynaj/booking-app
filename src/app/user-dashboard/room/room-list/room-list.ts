@@ -25,7 +25,6 @@ export class RoomList {
   successMessage: string | null = null;
 
   ngOnInit() {
-    console.log(this.route);
     this.route.paramMap.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       const id = params.get('guesthouseId');
 

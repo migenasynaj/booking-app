@@ -15,11 +15,6 @@
   </div>
 
   <div class="modal-body">
-    <!-- <div class="mb-3">
-      <label>ID</label>
-      <input class="form-control" [value]="guesthouse.id" disabled />
-    </div> -->
-
     <div class="mb-3">
       <label class="form-label">Name</label>
       <input class="form-control" formControlName="name" />
@@ -50,33 +45,26 @@
 
   } @else if (mode === 'create') {
 
-  <div class="modal-header">
-    <h5 class="modal-title">Create Guesthouse</h5>
-    <button class="btn-close" (click)="onCancel()"></button>
+  <div class="mb-3">
+    <label><span class="required">* </span>Name: </label>
+    <input class="form-control" formControlName="name" />
+
+    @if(nameIsInvalid){
+    <div class="invalid-feedback d-block">
+      <p class="control-error">Max length is 20 and min length is 3</p>
+    </div>
+    }
   </div>
 
-  <div class="modal-body">
-    <div class="mb-3">
-      <label><span class="required">* </span>Name: </label>
-      <input class="form-control" formControlName="name" />
+  <div class="mb-3">
+    <label><span class="required">*</span> Description:</label>
+    <textarea class="form-control" formControlName="description"></textarea>
 
-      @if(nameIsInvalid){
-      <div class="invalid-feedback d-block">
-        <p class="control-error">Max length is 20 and min length is 3</p>
-      </div>
-      }
+    @if(descriptionIsInvalid){
+    <div class="invalid-feedback d-block">
+      <p class="control-error">Max length is 60 and min length is 10</p>
     </div>
-
-    <div class="mb-3">
-      <label><span class="required">*</span> Description:</label>
-      <textarea class="form-control" formControlName="description"></textarea>
-
-      @if(descriptionIsInvalid){
-      <div class="invalid-feedback d-block">
-        <p class="control-error">Max length is 60 and min length is 10</p>
-      </div>
-      }
-    </div>
+    }
   </div>
 
   <div class="modal-footer">

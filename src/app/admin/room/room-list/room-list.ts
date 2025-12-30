@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Guesthouse } from '../../../shared-model/guesthouse.model';
 import { RoomDetails } from '../room-details/room-details';
@@ -84,12 +84,12 @@ export class RoomList {
     modalRef.componentInstance.guesthouseId = this.selectedGuesthouseId;
     modalRef.componentInstance.guesthouseName = this.selectedGuesthouseName;
 
-    modalRef.closed.subscribe((result) => {
-      if (result === 'created') {
-        this.successMessage = 'Room created successfully!';
-        this.hideSuccessMessage();
-        this.loadRooms(this.selectedGuesthouseId!, this.selectedGuesthouseName!);
-      }
+    modalRef.closed.subscribe((createdRoom) => {
+      if (!createdRoom) return;
+      this.successMessage = 'Room created successfully!';
+      this.hideSuccessMessage();
+      this.loadRooms(this.selectedGuesthouseId!, this.selectedGuesthouseName!);
+      // this.rooms = [...this.rooms, createdRoom];
     });
   }
 
@@ -102,14 +102,14 @@ export class RoomList {
     modalRef.componentInstance.mode = 'edit';
     modalRef.componentInstance.roomId = room.id;
     modalRef.componentInstance.guesthouseId = room.guestHouseId;
-    modalRef.componentInstance.guesthouseName = this.selectedGuesthouseName;
+    // modalRef.componentInstance.guesthouseName = this.selectedGuesthouseName;
 
-    modalRef.closed.subscribe((result) => {
-      if (result === 'saved') {
-        this.successMessage = 'Room updated successfully!';
-        this.hideSuccessMessage();
-        this.loadRooms(this.selectedGuesthouseId!, this.selectedGuesthouseName!);
-      }
+    modalRef.closed.subscribe((editedRoom) => {
+      if (!editedRoom) return;
+      this.successMessage = 'Room updated successfully!';
+      this.hideSuccessMessage();
+      // this.loadRooms(this.selectedGuesthouseId!, this.selectedGuesthouseName!);
+      this.rooms = this.rooms.map((room) => (room.id === editedRoom.id ? editedRoom : room));
     });
   }
 
@@ -124,12 +124,14 @@ export class RoomList {
     modalRef.componentInstance.roomName = room.name;
     modalRef.componentInstance.guesthouseName = this.selectedGuesthouseName;
 
-    modalRef.closed.subscribe((result) => {
-      if (result === 'deleted') {
-        this.successMessage = 'Room deleted successfully!';
-        this.hideSuccessMessage();
-        this.loadRooms(this.selectedGuesthouseId!, this.selectedGuesthouseName!);
-      }
+    modalRef.closed.subscribe((deletedRoom) => {
+      // if (result === 'deleted') {
+      if (!deletedRoom) return;
+
+      this.successMessage = 'Room deleted successfully!';
+      this.hideSuccessMessage();
+      // this.loadRooms(this.selectedGuesthouseId!, this.selectedGuesthouseName!);
+      this.rooms = this.rooms.filter((room) => room.id !== deletedRoom);
     });
   }
 

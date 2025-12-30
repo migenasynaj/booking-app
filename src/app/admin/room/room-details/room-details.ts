@@ -165,14 +165,16 @@ export class RoomDetails {
     };
 
     this.service.updateRoom(this.roomId, updatedRoom).subscribe({
-      next: () => this.activeModal.close('saved'),
-      error: () => alert('Failed to update room'),
+      next: () => this.activeModal.close(updatedRoom),
+      error: () => {
+        alert('Failed to update room');
+      },
     });
   }
 
   onDelete() {
     this.service.deleteRoomById(this.roomId).subscribe({
-      next: () => this.activeModal.close('deleted'),
+      next: () => this.activeModal.close(this.roomId),
       error: () => alert('Failed to update room'),
     });
   }
@@ -182,7 +184,7 @@ export class RoomDetails {
   }
 
   onCreate() {
-    console.log('Is Create Mode:', this.mode === 'create');
+    // console.log('Is Create Mode:', this.mode === 'create');
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -199,7 +201,7 @@ export class RoomDetails {
     };
 
     this.service.createRoom(newRoom).subscribe({
-      next: () => this.activeModal.close('created'),
+      next: () => this.activeModal.close('create'),
       error: () => alert('Failed to create guesthouse'),
     });
   }

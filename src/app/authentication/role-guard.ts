@@ -5,7 +5,7 @@ export const roleGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
   const allowedRoles = route.data['roles'];
-  // as string[];
+
   const userData = localStorage.getItem('user');
 
   if (!userData) {

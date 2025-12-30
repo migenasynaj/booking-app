@@ -11,13 +11,6 @@ import { SearchGuesthouses } from '../user-dashboard/guesthouses/guesthouses.mod
 export class GuesthouseService {
   private http = inject(HttpClient);
 
-  // getGuesthouse() {
-  //   console.log(`${environment.apiUrl}${environment.endpoints.guesthouse.getAll}`);
-  //   return this.http.get<Guesthouse[]>(
-  //     `${environment.apiUrl}${environment.endpoints.guesthouse.getAll}`
-  //   );
-  // }
-
   getGuesthouse(searchParams?: SearchGuesthouses) {
     return this.http.get<Guesthouse[]>(
       `${environment.apiUrl}${environment.endpoints.guesthouse.getAll}`,

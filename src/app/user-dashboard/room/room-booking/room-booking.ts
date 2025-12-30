@@ -39,10 +39,8 @@ export class RoomBooking {
     this.datepickerReady = false;
     this.bookingService.getBookingsPerRoom(this.selectedroomId).subscribe({
       next: (bookings) => {
-        console.log('API response:', bookings);
         this.bookedDates = [];
         this.mapBookingsToDisabledDates(bookings);
-        console.log('all bookedDates:', this.bookedDates);
 
         this.datepickerReady = true;
       },
@@ -52,8 +50,6 @@ export class RoomBooking {
 
   private mapBookingsToDisabledDates(bookings: BookedDateResponse[]) {
     bookings.forEach(({ bookFrom, bookTo }) => {
-      console.log(' bookingFrom:', bookFrom);
-      console.log(' bookingTo :', bookTo);
       let startDate = this.searchGuesthouseService.dateOnly(bookFrom);
       const endDate = this.searchGuesthouseService.dateOnly(bookTo);
 
@@ -88,11 +84,7 @@ export class RoomBooking {
       alert('Selected dates overlap an existing booking.');
       return;
     }
-    // const booking: roomBooking = {
-    //   roomId: this.selectedroomId,
-    //   bookFrom: this.ngbDateKey(this.form.value.bookFrom!),
-    //   bookTo: this.ngbDateKey(this.form.value.bookTo!),
-    // };
+
     const booking: roomBooking = {
       roomId: this.selectedroomId,
       bookFrom: this.searchGuesthouseService.ngbDateKey(from),
@@ -130,32 +122,4 @@ export class RoomBooking {
   onCancel() {
     this.activeModal.dismiss();
   }
-
-  //convert jsDate to ngbdatestruct
-  // private setMinDateToday() {
-  //   const today = new Date();
-  //   this.minDate = { year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate() };
-  // }
-
-  //convert dates from backend as calendar days only without timestamp (to seperate the range between booked dates)
-  // private dateOnly(dateStr: string) {
-  //   const [y, m, d] = dateStr.split('T')[0].split('-').map(Number);
-  //   return new Date(y, m - 1, d);
-  // }
-
-  //convert date to string by storing dates without timezone
-  // private formatDate(date: Date) {
-  //   const year = date.getFullYear();
-  //   const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  //   const day = date.getDate().toString().padStart(2, '0');
-  //   return `${year}-${month}-${day}`;
-  // }
-
-  //convert NgbDateStruct to string
-  // private ngbDateKey(date: NgbDateStruct) {
-  //   const y = date.year;
-  //   const m = String(date.month).padStart(2, '0');
-  //   const d = String(date.day).padStart(2, '0');
-  //   return `${y}-${m}-${d}`;
-  // }
 }

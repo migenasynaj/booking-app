@@ -104,7 +104,7 @@ export class UserDetails {
         next: () => {
           this.successMessage = 'User saved successfully!';
           this.hideSuccessMessage();
-          this.ngOnInit;
+          //  this.userId
         },
         error: () => {
           this.error = 'Failed to update user.';

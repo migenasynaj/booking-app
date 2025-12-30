@@ -40,7 +40,6 @@ export class Bookings {
         this.bookingDetails = bookingDetails.sort(
           (a, b) => new Date(b.bookFrom).getTime() - new Date(a.bookFrom).getTime()
         );
-        console.log('Bookings:', this.bookingDetails);
 
         this.loading = false;
       },
